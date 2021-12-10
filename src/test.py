@@ -1,11 +1,9 @@
 import argparse
 import time
 from itertools import count
-import math
 
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import gym
 
 from agent import TDLAgent
