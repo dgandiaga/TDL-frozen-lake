@@ -64,7 +64,7 @@ Here the agent has learn that it's better to go up with the hope of it ending up
 ![image](https://user-images.githubusercontent.com/26325749/145645034-b7d7355f-bed7-4412-9d14-9d397dd79911.png)
 
 This behavior given the stochastic nature of the environment is one of the reasons I chose this algorithm instead of **Q-learning** or other off-policy versions of** Temporal Difference Learning**. In this paragraph from Sutton and Barto's book they explain the point over a similar problem but with less randomness, since there the stochasticity only comes from the exploration and not from the slippery floor:
-![image](https://user-images.githubusercontent.com/26325749/145646053-5c2c6b41-3764-4761-8399-26994b4581c8.png)
+![image](https://user-images.githubusercontent.com/26325749/145647826-c80d5bde-f786-44da-8635-b9367d6c15eb.png)
 
 Finally here are the results for the 8x8 stochastic frozen-lake:
 ![frozen-lake-8x8](https://user-images.githubusercontent.com/26325749/145646701-238769b7-9706-4068-87a0-abc18bc7db2e.png)
