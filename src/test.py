@@ -8,9 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import gym
 
-
 from agent import TDLAgent
-
 
 parser = argparse.ArgumentParser(description='Train an agent for different versions of frozen-lake')
 parser.add_argument('--render', action='store_true', help='render the environment')
@@ -19,7 +17,6 @@ parser.add_argument('--episodes', type=int, default=10, help='number of episodes
 parser.add_argument('--env_size', type=int, choices=[4, 8], help='size of the environment grid', default=8)
 parser.add_argument('--deterministic', action='store_true', help='Make the env deterministic')
 args = parser.parse_args()
-
 
 if __name__ == "__main__":
 
@@ -34,7 +31,6 @@ if __name__ == "__main__":
     episode_rewards = []
     accumulated_reward = []
     results = pd.DataFrame(columns=['episode', 'reward', 'avg_reward'])
-
 
     for i_ep in range(args.episodes):
         episode_rewards.append(0)
@@ -65,4 +61,4 @@ if __name__ == "__main__":
             if done:
                 break
 
-    print(f'Average reward: {np.sum(episode_rewards)/len(episode_rewards)}')
+    print(f'Average reward: {np.sum(episode_rewards) / len(episode_rewards)}')
