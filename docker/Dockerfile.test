@@ -6,8 +6,12 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY src/ .
 COPY models models
+COPY test/test.py .
+
+RUN python -m unittest test.TestModels
+
+COPY src/ .
 
 # command to run on container start
 ENTRYPOINT [ "python", "./test.py" ]

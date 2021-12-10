@@ -6,6 +6,12 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
+COPY test/test_train.py .
+COPY models models
+COPY results results
+
+RUN python -m unittest test_train.TestRoutes
+
 COPY src/ .
 
 # command to run on container start
