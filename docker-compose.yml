@@ -1,0 +1,19 @@
+services:
+  train:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.train
+    volumes:
+      - ./results/:/code/results/
+      - ./models/:/code/models/
+    container_name: train_frozen_lake
+    command: --env_size 8 --deterministic --episodes 1000 --alpha 0.1 --gamma 0.95 --eps-decay 0 --eps-min 0 --default-q-value 2
+
+  test:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.test
+    container_name: test_frozen_lake
+    command: --env_size 8 --episodes 1 --model 2021-12-10_18:22:31 --render
+
+
