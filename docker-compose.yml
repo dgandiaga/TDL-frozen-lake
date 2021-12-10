@@ -1,19 +1,71 @@
 services:
-  train:
+  train-4x4-det:
     build:
       context: .
       dockerfile: docker/Dockerfile.train
     volumes:
       - ./results/:/code/results/
       - ./models/:/code/models/
-    container_name: train_frozen_lake
-    command: --env_size 8 --deterministic --episodes 1000 --alpha 0.1 --gamma 0.95 --eps-decay 0 --eps-min 0 --default-q-value 2
+    container_name: train
+    command: --env-size 4 --deterministic --episodes 200 --alpha 1 --gamma 0.95 --eps-decay 0 --eps-min 0 --default-q-value 2 --tag frozen-lake-4x4-det
 
-  test:
+  test-4x4-det:
     build:
       context: .
       dockerfile: docker/Dockerfile.test
-    container_name: test_frozen_lake
-    command: --env_size 8 --episodes 1 --model 2021-12-10_18:22:31 --render
+    container_name: test
+    command: --env_size 4 --deterministic --episodes 1 --model frozen-lake-4x4-det --render
+
+  train-8x8-det:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.train
+    volumes:
+      - ./results/:/code/results/
+      - ./models/:/code/models/
+    container_name: train
+    command: --env-size 8 --deterministic --episodes 200 --alpha 1 --gamma 0.95 --eps-decay 0 --eps-min 0 --default-q-value 2 --tag frozen-lake-8x8-det
+
+  test-8x8-det:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.test
+    container_name: test
+    command: --env_size 8 --deterministic --episodes 1 --model frozen-lake-8x8-det --render
+
+  train-4x4:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.train
+    volumes:
+      - ./results/:/code/results/
+      - ./models/:/code/models/
+    container_name: train
+    command: --env-size 4 --episodes 10000 --alpha 0.05 --gamma 0.9 --eps-decay 0.999 --eps-min 0 --default-q-value 2 --tag frozen-lake-4x4
+
+  test-4x4:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.test
+    container_name: test
+    command: --env_size 4 --episodes 1000 --model frozen-lake-4x4
+
+  train-8x8:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.train
+    volumes:
+      - ./results/:/code/results/
+      - ./models/:/code/models/
+    container_name: train
+    command: --env-size 8 --deterministic --episodes 200 --alpha 1 --gamma 0.95 --eps-decay 0 --eps-min 0 --default-q-value 2 --tag frozen-lake-8x8-det
+
+  test-8x8:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.test
+    container_name: test
+    command: --env_size 8 --deterministic --episodes 4 --model frozen-lake-8x8-det --render
+
 
 
