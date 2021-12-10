@@ -37,6 +37,7 @@ These configurations are not a real challenge since the model only needs to find
 As soon as it has taken the best path a couple of times it never fails again. This is because for these environments I choose a high alpha since there's no noise in the returns and a full-greedy policy since encouraging exploration is not required.
 
 Here we can see by launching the test-4x4-det service how it follows the best path possible:
+
 ![image](https://user-images.githubusercontent.com/26325749/145644552-d7c0eca9-b514-4a19-bd05-14f133b0754a.png)
 
 
