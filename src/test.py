@@ -65,9 +65,4 @@ if __name__ == "__main__":
             if done:
                 break
 
-        if len(episode_rewards) < 100:
-            accumulated_reward.append(np.mean(episode_rewards))
-        else:
-            accumulated_reward.append(np.mean(episode_rewards[-100:]))
-
-        results.loc[len(results)] = [i_ep, episode_rewards[-1], accumulated_reward[-1]]
+    print(f'Average reward: {np.sum(episode_rewards)/len(episode_rewards)}')

@@ -40,6 +40,9 @@ def train(env, episodes, render, default_q_value, eps_decay, eps_min, gamma, alp
         # Start env and choose first action
         state = env.reset()
         action = agent.select_action(state)
+
+        # Initialize reward for this episode
+        episode_rewards.append(0)
         if render:
             env.render()
 
