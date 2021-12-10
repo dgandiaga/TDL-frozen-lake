@@ -49,6 +49,11 @@ if __name__ == "__main__":
             next_state, reward, done, _ = env.step(action)
             if args.render:
                 env.render()
+                if done:
+                    if reward == 1:
+                        print('SUCCESS')
+                    else:
+                        print('FAIL')
                 time.sleep(1)
 
             next_action = agent.select_action(next_state)
