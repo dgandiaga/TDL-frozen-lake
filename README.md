@@ -51,22 +51,27 @@ The services for the stochastic versions of the environment are:
 For these versions I've used a small alpha and a high epsilon decay in order to encourage the exploration and make the agent robust to the noise. Convergence is much harder to achieve and it never gets a perfect result.
 
 Let's analyze the 4x4 example:
+
 ![frozen-lake-4x4](https://user-images.githubusercontent.com/26325749/145644576-e800a3b1-aef1-4da3-b821-f6f2acf4bcb1.png)
 
 Convergence is much slower. You may think that accumulated reward is not as good as it should be, but keep in mind that this policy always keeps an epsilon higher than zero, so the average reward is lower than if we'd switch to the full-greedy policy once we now the agent is trained. The result when the agent is trained and we switch to the greedy policy is in fact about **75% of success**.
 
 The agent gets really conservative in its choices due to the high degree of stochasticity introduced by both the slippery floor and the exploration ratio. For example, for the initial state it tries to go to the left:
+
 ![image](https://user-images.githubusercontent.com/26325749/145644801-d62ff22d-f314-4d76-ad45-fa2a02a07eed.png)
 
 That may seem counterintuitive, but in fact trying this movement as many times as needed is the only way of eventually going down while eliminating the risk of going right, which is a non-desirable situation.
 
 Here the agent has learn that it's better to go up with the hope of it ending up going to the right, even if the most possible outcome is it getting further away from the goal, instead of just trying directly to go to the right and facing the chance of end up going down to the hole:
+
 ![image](https://user-images.githubusercontent.com/26325749/145645034-b7d7355f-bed7-4412-9d14-9d397dd79911.png)
 
 This behavior given the stochastic nature of the environment is one of the reasons I chose this algorithm instead of **Q-learning** or other off-policy versions of** Temporal Difference Learning**. In this paragraph from Sutton and Barto's book they explain the point over a similar problem but with less randomness, since there the stochasticity only comes from the exploration and not from the slippery floor:
+
 ![image](https://user-images.githubusercontent.com/26325749/145647826-c80d5bde-f786-44da-8635-b9367d6c15eb.png)
 
 Finally here are the results for the 8x8 stochastic frozen-lake:
+
 ![frozen-lake-8x8](https://user-images.githubusercontent.com/26325749/145646701-238769b7-9706-4068-87a0-abc18bc7db2e.png)
 
 Here I had to raise gamma and alpha compared to the 4x4 version since runs are longer and there are more different states.
