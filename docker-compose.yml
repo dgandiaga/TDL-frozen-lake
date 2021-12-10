@@ -58,14 +58,14 @@ services:
       - ./results/:/code/results/
       - ./models/:/code/models/
     container_name: train
-    command: --env-size 8 --deterministic --episodes 200 --alpha 1 --gamma 0.95 --eps-decay 0 --eps-min 0 --default-q-value 2 --tag frozen-lake-8x8-det
+    command: --env-size 8 --episodes 10000 --alpha 0.1 --gamma 0.95 --eps-decay 0.999 --eps-min 0 --default-q-value 2 --tag frozen-lake-8x8
 
   test-8x8:
     build:
       context: .
       dockerfile: docker/Dockerfile.test
     container_name: test
-    command: --env_size 8 --deterministic --episodes 4 --model frozen-lake-8x8-det --render
+    command: --env_size 8 --episodes 1000 --model frozen-lake-8x8
 
 
 
