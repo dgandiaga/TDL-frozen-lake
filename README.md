@@ -5,10 +5,10 @@ SARSA is an online version of **Temporal Difference Learning**. That means that 
 
 ![image](https://user-images.githubusercontent.com/26325749/145645431-62e30720-fe43-4e02-8319-eb319b025124.png)
 
-At the beginning it initializes all the action values Q(s, a) when a new state is discovered. In this version I use surrealistic high values for initialization in order to encourage exploration.
-Then everytime an action is taken, it chooses the action that is going to be taken in the new state and use its Q value for updating the expected value of the previous state. That only affects to non-terminal states, for terminal states the return is just the reward gotten in this last step.
+At the beginning it initializes all the action values Q(s, a) when a new state is discovered. In this version **I use surrealistic high values for initialization** in order to **encourage exploration**.
+Then everytime an action is taken, it chooses the action that is going to be taken in the new state and use its Q value for updating the expected value of the previous state. That only affects non-terminal states, for terminal states the return is just the reward gotten in this last step.
 
-This means that it is an on-line algorithm (the same policy that is being used for choosing the actions is also used for calculating returns during the update). This means it's sensitive to bad choices due to a non-greedy policy's decision for exploring. In this case I use an epsilon-greedy policy whose epsilon is multiplied by a factor lower than one at the end of every episode.
+This means that it is an **on-line algorithm** (the same policy that is being used for choosing the actions is also used for calculating returns during the update). This means it's sensitive to bad choices due to a non-greedy policy's decision for exploring. In this case I use an **epsilon-greedy** policy whose epsilon is multiplied by a factor lower than one at the end of every episode.
 
 ## Usage
 
@@ -35,7 +35,7 @@ These configurations are not a real challenge since the model only needs to find
 
 
 
-As soon as it has taken the best path a couple of times it never fails again. This is because for these environments I choose a high alpha since there's no noise in the returns and a full-greedy policy since encouraging exploration is not required.
+As soon as it has taken the best path a couple of times it never fails again. This is because for these environments I choose a **high alpha** since there's no noise in the returns and a **full-greedy policy** since encouraging exploration is not required.
 
 Here we can see by launching the test-4x4-det service how it follows the best path possible:
 ![image](https://user-images.githubusercontent.com/26325749/145644552-d7c0eca9-b514-4a19-bd05-14f133b0754a.png)
@@ -49,7 +49,7 @@ The docker-compose services for the stochastic versions of the environment are:
 * train-8x8
 * test-8x8
 
-For these versions I've used a small alpha and a high epsilon decay in order to encourage the exploration and make the agent robust to the noise. Convergence is much harder to achieve, so I have not been able to get a perfect result.
+For these versions I've used a **small alpha** and a **high epsilon decay** in order to encourage the exploration and make the agent robust to the noise. Convergence is much harder to achieve.
 
 Let's analyze the 4x4 example:
 
@@ -57,13 +57,14 @@ Let's analyze the 4x4 example:
 
 Convergence is much slower. You may think that accumulated reward is not as good as it should be, but keep in mind that this policy always keeps an epsilon higher than zero, so the average reward is lower than if we'd switch to the full-greedy policy once we now the agent is trained. The result when the agent is trained and we switch to the greedy policy is in fact about **75% of success**.
 
-The agent gets really conservative in its choices due to the high degree of stochasticity introduced by both the slippery floor and the exploration ratio. For example, for the initial state it tries to go to the left:
+The agent gets really **conservative** in its choices due to the **high degree of stochasticity**
+introduced by both the slippery floor and the exploration ratio. For example, for the initial state it tries to go to the left:
 
 ![image](https://user-images.githubusercontent.com/26325749/145644801-d62ff22d-f314-4d76-ad45-fa2a02a07eed.png)
 
-That may seem counterintuitive, but in fact trying this movement as many times as needed is the only way of eventually going down while eliminating the risk of going right, which is a non-desirable situation.
+That may seem counterintuitive, but in fact trying this movement as many times as needed is the only way of eventually going down while eliminating the risk of ending going right, which is a non-desirable situation. Since there's no time limit this is indeed the smartest option.
 
-In the next example the agent has learned that it's better to go up with the hope of it ending up going to the right, even if the most possible outcome is it getting further away from the goal, instead of just trying directly to go to the right and facing the chance of end up going down to the hole:
+In the next example the agent has learned that it's better to go up with the hope of it ending going to the right, even if the most possible outcome is it getting further away from the goal, instead of just trying directly to go to the right and facing the chance of going down to the hole:
 
 ![image](https://user-images.githubusercontent.com/26325749/145645034-b7d7355f-bed7-4412-9d14-9d397dd79911.png)
 
