@@ -79,3 +79,10 @@ Finally, here are the results for the 8x8 stochastic frozen-lake:
 Here I had to raise **gamma** and **alpha** compared to the 4x4 version since runs are longer and there are more different states.
 
 Performance over a thousand runs once switched to test-mode is **~72%**. The behavior follows the same patterns that I explained above for the stochastic 4x4 grid.
+
+## Future Work
+in order to achieve faster convergence, implement n-step SARSA. In this version of the algorithm updates are performed not only considering the action value of the next state but over n-steps in the future:
+
+![image](https://user-images.githubusercontent.com/26325749/145721595-6e357b47-ef8b-44f6-8b58-491f81f35180.png)
+
+
